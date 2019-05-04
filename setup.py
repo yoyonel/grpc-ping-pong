@@ -36,8 +36,8 @@ class BuildPackageProtos(setuptools.Command):
         if GRPC_INSTALLED:
             command.build_package_protos(self.distribution.package_dir[''])
         else:
-            print("Warning: skipping generation of proto classes because grpcio-tools is not installed",
-                  file=sys.stderr)
+            print("Warning: skipping generation of proto classes "
+                  "because grpcio-tools is not installed", file=sys.stderr)
 
 
 class BuildPyCommand(_build_py):
@@ -64,6 +64,21 @@ class SDistCommand(_sdist):
         _sdist.run(self)
 
 
+install_requires = [
+    "grpcio",
+    "grpcio-tools"
+]
+
+tests_requires = [
+    "flake8",
+    "flake8-html",
+    "pytest",
+    "pytest-cov",
+    "pytest-html",
+    "pytest-timeout",
+    "tox",
+]
+
 # https://docs.python.org/3/distutils/setupscript.html
 setup(
     name='grpc_ping_pong',
@@ -88,27 +103,18 @@ setup(
         'Operating System :: POSIX',
         'Operating System :: Microsoft :: Windows',
         'Programming Language :: Python',
-        'Programming Language :: Python :: 2.7',
-        'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.3',
-        'Programming Language :: Python :: 3.4',
-        'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: Implementation :: CPython',
         'Programming Language :: Python :: Implementation :: PyPy',
         'Topic :: Utilities',
     ],
-    keywords=[
-
-    ],
-    install_requires=[
-        "grpcio",
-        "grpcio-tools",
-    ],
+    python_requires='>=3.6',
+    keywords=[],
+    install_requires=install_requires,
+    tests_require=tests_requires,
     extras_require={
-        ':python_version == "2.7"': [
-        ],
+        'develop': install_requires + tests_requires,
     },
     entry_points={
         'console_scripts': [
