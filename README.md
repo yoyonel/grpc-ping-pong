@@ -55,6 +55,24 @@ delaySeconds: 1.0
 2019-05-04 15:03:30,713 - grpc.pingpong.client - INFO - Thanks, friend!
 ```
 
+## Using Makefile
+
+```sh
+################
+# Installation
+################
+╰─ make install
+
+################
+# Running
+################
+# - Server
+╰─ make server
+
+# - Client
+╰─ make client
+```
+
 ## Credits
 
 Initial version from
