@@ -6,7 +6,6 @@ import os
 from proto.ping_pb2 import Ping
 from proto.ping_pb2_grpc import PingPongStub
 
-
 logger = logging.getLogger('grpc.pingpong.client')
 
 
@@ -24,7 +23,8 @@ def process(args):
     """
     logger.setLevel(logging.DEBUG if args.verbose else logging.INFO)
 
-    grpc_host_and_port = os.environ.get("GRPC_PING_PONG_GRPC_HOST_AND_PORT", '[::]:50051')
+    grpc_host_and_port = os.environ.get("GRPC_PING_PONG_GRPC_HOST_AND_PORT",
+                                        '[::]:50051')
     logger.debug("grpc_host_and_port: {}".format(grpc_host_and_port))
     client = PingPongStub(grpc.insecure_channel(grpc_host_and_port))
 
@@ -84,7 +84,10 @@ def parse_arguments():
 
 
 def main():
-    logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.DEBUG)
+    logging.basicConfig(
+        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+        level=logging.DEBUG
+    )
 
     args = parse_arguments()
     process(args)

@@ -59,7 +59,7 @@ def serve(
     logger.info("Ready and waiting for connections.")
 
     if not block:
-        return server
+        return server, port
 
     # Wait for a signal before exiting
     sig = signal.sigwait(SIGNALS)
