@@ -1,4 +1,5 @@
 syntax = "proto3";
+package PingPong;
 
 message Ping {
     string message = 1;
